@@ -1,0 +1,29 @@
+--- !ruby/object:Recipe
+name: Chicken Curry
+type: dinner
+ingredients:
+- !ruby/object:Ingredient
+  name: onion
+  type: vegetable
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: chicken breast
+  type: meat
+  quantity: 2
+  measurement: ''
+- !ruby/object:Ingredient
+  name: Tikka masala sauce
+  type: sauce/condiment
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: red pepper
+  type: vegetable
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: rice
+  type: grain
+  quantity: 2
+  measurement: cups

@@ -1,0 +1,14 @@
+--- !ruby/object:Recipe
+name: cereal and milk
+type: breakfast
+ingredients:
+- !ruby/object:Ingredient
+  name: cereal
+  type: cereals
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: oat milk
+  type: health food
+  quantity: 1
+  measurement: ''

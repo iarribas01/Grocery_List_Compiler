@@ -1,0 +1,29 @@
+--- !ruby/object:Recipe
+name: mexican soup
+type: dinner
+ingredients:
+- !ruby/object:Ingredient
+  name: chicken breast
+  type: meat
+  quantity: 250
+  measurement: gram
+- !ruby/object:Ingredient
+  name: red pepper
+  type: vegetable
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: cream cheese
+  type: dairy
+  quantity: 8
+  measurement: oz
+- !ruby/object:Ingredient
+  name: onion
+  type: vegetable
+  quantity: 1
+  measurement: ''
+- !ruby/object:Ingredient
+  name: chicken stock
+  type: spices
+  quantity: 1
+  measurement: ''
