@@ -1,63 +1,75 @@
 class GroceryList
-  def initialize(recipes, list = [])
+  attr_reader :list, :recipes
+  attr_writer :list
+
+  def initialize(recipes)
     @recipes = recipes
-    @list = list
+    @list = []
   end
 
-  def list
-    @list
+  def generate!
+    self.list = all_ingredients
+    compress!
+    sort!
+    to_s
   end
 
-  # returns array of ingredients from list of recipes
-  def ingredients_from(recipes)
-    recipes.map do |recipe|
-      recipe.ingredients
-    end.flatten
+  # removes all duplicate ingredients in @list
+  # and compresses them into a single ingredient
+  def compress!
+    temp = all_ingredients
+    result = []
+    index = 0
+
+    loop do
+      ingredient = temp[index]
+      duplicates = strip_duplicates(ingredient, temp)
+      result << combine(duplicates)
+      break if temp.empty?
+    end
+
+    self.list = result
   end
 
-  # returns an array of strings containing the unique
-  # ingredients from all of the recipes
-  def ingredient_names(ingredients)
-    ingredients.map do |ingredient|
-      ingredient.name
-    end.uniq
+  def combine(ingredients)
+    if ingredients.size > 1
+      sum = ingredients.map(&:quantity).sum
+      Ingredient.new(ingredients.first.name, ingredients.first.type, sum, ingredients.first.measurement)
+    else
+      ingredients.first
+    end
   end
 
-  def recipes
-    @recipes
+  # sorts ingredients based on type
+  def sort!
+    sorted = {}
+    @list.each do |ingredient|
+      sorted[ingredient.type] = [] unless sorted.key? ingredient.type
+      sorted[ingredient.type] << ingredient
+    end
+    self.list = sorted.values.flatten
   end
 
-  private
-  
-  def list=(new_list)
-    @list = new_list
+  # returns array of ingredient objects from all of recipes
+  def all_ingredients
+    recipes.map(&:ingredients).flatten
   end
 
-
-  # returns an array of ingredients where 
-  # overlap between recipes is compressed
-    # ex) two recipes call for 1 onion,
-    #     list -> 2 onions
-
-  def compress()
-    # cycle through list of ingredient names
-    # if the count of a particular ingredient name is more than one
-      # find the two ingredients in the list of ingredients
-      # compress them
-        # add the two quantities
-        # delete the duplicate instances of ingredients and keep one
-    # otherwise
-      # continue until reached the end of the ingredient names
-
+  # removes and returns duplicated ingredients
+  # from an ingredient list
+  def strip_duplicates(ingredient, ingredient_list)
+    deleted = ingredient_list.select { |i| i == ingredient }
+    ingredient_list.delete_if { |i| i == ingredient }
+    deleted
   end
 
-  def sort()
-
+  # returns array of strings of the ingredients
+  def to_s
+    string = ''
+    @list.map do |ingredient|
+      string += ingredient.to_s
+      string += "\n"
+    end
+    string
   end
-
-  # returns hash of name and quantity of ingredients
-  def simplify()
-
-  end
-
 end

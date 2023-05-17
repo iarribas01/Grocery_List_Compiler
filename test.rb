@@ -28,7 +28,5 @@ recipes = [
   Recipe.load("mexican_soup.yaml")
 ]
 grocery_list = GroceryList.new(recipes)
-p grocery_list.ingredient_names(grocery_list.ingredients_from(grocery_list.recipes))
 
-
-
+puts grocery_list.generate!
