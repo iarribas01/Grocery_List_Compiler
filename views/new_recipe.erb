@@ -1,0 +1,73 @@
+<% content_for :links do %>
+  <link rel="stylesheet" href="./stylesheets/layout.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./javascripts/toggle_window.js"></script>
+<% end %>
+
+<h1>Add a new recipe</h1>
+<form action="/new_recipe" method="post">
+
+  <label for="recipe-name">Name</label>
+  <input type="text" name="recipe_name" id="recipe-name" placeholder="pizza">
+
+  <label for="recipe-type-select">Type</label>
+  <select name="recipe_type" id="recipe-type-select">
+    <option value="breakfast">Breakfast</option>
+    <option value="lunch">Lunch</option>
+    <option value="dinner">Dinner</option>
+    <option value="dessert">Dessert</option>
+    <option value="snack">Snack</option>
+  </select>
+  
+
+  <h2>Ingredients</h2>
+
+
+  <% if session[:recipe].has_ingredients? %>
+    <ul>
+      <% session[:recipe].ingredients.each do |ingredient| %>
+        <li><%= ingredient %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3>There are no ingredients.</h3>
+  <% end %>
+  <button onclick="openDiv()" type="button">Add ingredient</button>
+  <fieldset id="window">
+    <label for="ingredient-name">Name</label>
+    <input type="text" name="ingredient_name" id="ingredient-name" placeholder="cheese">
+
+    <label for="ingredient-type-select">Type</label>
+    <select name="ingredient_type" id="ingredient-type-select">
+      <option value="dairy">Dairy</option>
+      <option value="grain">grain</option>
+      <option value="vegetable">vegetable</option>
+      <option value="fruit">fruit</option>
+      <option value="meat">meat</option>
+      <option value="condiments">condiments</option>
+      <option value="alcohol">Alcohol</option>
+    </select>
+
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity">
+
+    <label for="measurement-select">Unit of measurement</label>
+    <select name="measurement" id="measurement-select">
+      <option value="">none</option>
+      <option value="lbs">lbs</option>
+      <option value="g">g</option>
+      <option value="oz">oz</option>
+      <option value="L">L</option>
+      <option value="mL">mL</option>
+      <option value="cups">cups</option>
+      <option value="tbsp">tbsp</option>
+      <option value="tsp">tsp</option>
+    </select>
+
+    <input type="submit" name="action" value="Add ingredient">
+  </fieldset>
+
+
+  <button onclick="closeDiv()" type="button">Close</button> 
+  <input type="submit" name="action" value="Add recipe">
+</form>

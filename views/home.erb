@@ -5,5 +5,25 @@
 
 <header>
   <h1>This belongs to home.erb</h1>
-  <a href="/meal">Click me</a>
+  
+  <h2>This week's meals</h2>
+
+  <% if session[:grocery_list].has_recipes? %>
+    <ul>
+      <% session[:grocery_list].recipes.each do |recipe| %>
+        <li><%= recipe %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3>No meals for this week :(</h3>
+  <% end %>
+
+  <form action="/edit_meals" method="get">
+    <input type="submit" value="Edit meals">
+  </form>
+
+  <form action="/new_recipe" method="get">
+    <input type="submit" value="add recipe">
+  </form>
+
 </header>
