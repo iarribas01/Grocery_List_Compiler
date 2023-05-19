@@ -17,8 +17,12 @@ class GroceryList
     !recipes.empty?
   end
 
-  def add(recipe)
-    recipes << recipe
+  def add(list)
+    recipes << list
+  end
+
+  def delete(recipe_name)
+    recipes.delete_if {|recipe| recipe.name == recipe_name}
   end
 
   # removes all duplicate ingredients in @list

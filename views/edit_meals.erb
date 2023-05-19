@@ -1,3 +1,35 @@
+<% content_for :links do %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./javascripts/submitForm.js"></script>
+<% end %>
+
+
 <h1>Edit meals</h1>
 
-<% p load_saved_recipes %>
+<form action="/add_meal" method="post" id="edit-meals-form">
+
+  <select name="selected_meal" size="4">
+    <% @saved_recipes.each do |recipe| %>
+    <% recipe%>
+      <option ondblclick="submitForm('edit-meals-form')" value="<%= recipe.id %>">
+        <%= recipe.name %>
+      </option>
+
+    <% end %>
+    </select>
+</form>
+
+<form onsubmit="alert(this.submitted; return false;)" action="/delete_meal" method="post" id="delete-meals-form">
+  <h2>Current meals</h2>
+    <ul>
+      <% session[:grocery_list].recipes.each do |meal| %>
+        <li>
+          <%= meal.name %>
+          <input onclick="this.form.submitted=this.value;" id="delete-button" type="submit" name="delete" value="<%= meal.name %>">
+        </li>
+        
+      <% end %>
+    </ul>
+
+</form>
+

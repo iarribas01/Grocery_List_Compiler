@@ -7,11 +7,10 @@
   <h1>This belongs to home.erb</h1>
   
   <h2>This week's meals</h2>
-
   <% if session[:grocery_list].has_recipes? %>
     <ul>
       <% session[:grocery_list].recipes.each do |recipe| %>
-        <li><%= recipe %></li>
+        <li><%= recipe.name %></li>
       <% end %>
     </ul>
   <% else %>
@@ -24,6 +23,10 @@
 
   <form action="/new_recipe" method="get">
     <input type="submit" value="add recipe">
+  </form>
+
+  <form action="/generate" method="post">
+    <input type="submit" value="generate my list!">
   </form>
 
 </header>

@@ -8,8 +8,22 @@
   </head>
   <body>
 
-  <p>This belongs to layout.erb</p>
-  <%= yield %>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/edit_meals">Edit meals</a></li>
+        <li><a href="/new_recipe">New recipe</a></li>
+        <li><a href="#"></a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <main>
+    <p>This belongs to layout.erb</p>
+    <%= yield %>
+
+  
+  </main>
   </body>
 </html>
