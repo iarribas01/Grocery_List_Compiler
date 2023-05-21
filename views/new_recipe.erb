@@ -2,13 +2,14 @@
   <link rel="stylesheet" href="./stylesheets/layout.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./javascripts/toggle_window.js"></script>
+  <link rel="stylesheet" href="./stylesheets/new_recipe.css">
 <% end %>
 
 <h1>Add a new recipe</h1>
 <form action="/new_recipe" method="post">
 
   <label for="recipe-name">Name</label>
-  <input type="text" name="recipe_name" id="recipe-name" placeholder="pizza">
+  <input type="text" name="recipe_name" id="recipe-name" value="<%= session[:recipe].name || "" %>">
 
   <label for="recipe-type-select">Type</label>
   <select name="recipe_type" id="recipe-type-select">
@@ -21,17 +22,21 @@
   
 
   <h2>Ingredients</h2>
+  <div class="content">
+    <% if session[:recipe].has_ingredients? %>
+      <ul>
+        <% session[:recipe].ingredients.each do |ingredient| %>
+          <li><%= ingredient %></li>
+          <input onclick="this.form.submitted=this.value;" class="delete-button" type="submit" name="deleted_item" value="<%= ingredient.name %>">
+
+        <% end %>
+      </ul>
+    <% else %>
+      <h3>There are no ingredients.</h3>
+    <% end %>
+  </div>
 
 
-  <% if session[:recipe].has_ingredients? %>
-    <ul>
-      <% session[:recipe].ingredients.each do |ingredient| %>
-        <li><%= ingredient %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <h3>There are no ingredients.</h3>
-  <% end %>
   <button onclick="openDiv()" type="button">Add ingredient</button>
   <fieldset id="window">
     <label for="ingredient-name">Name</label>

@@ -1,0 +1,9 @@
+--- !ruby/object:Recipe
+name: Avocado toast
+type: breakfast
+ingredients:
+- !ruby/object:Ingredient
+  name: flour
+  type: dairy
+  quantity: '1'
+  measurement: ''

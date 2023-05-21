@@ -22,4 +22,20 @@ class Ingredient
       type == other.type &&
       measurement == other.measurement
   end
+
+  def valid?
+    valid_name? && valid_type? && valid_quantity?
+  end
+
+  def valid_name?
+    !name.empty?
+  end
+
+  def valid_type?
+    !type.empty?
+  end
+
+  def valid_quantity?
+    quantity.to_i > 0 
+  end
 end

@@ -1,0 +1,9 @@
+--- !ruby/object:Recipe
+name: Cheese
+type: snack
+ingredients:
+- !ruby/object:Ingredient
+  name: cheese
+  type: dairy
+  quantity: '1'
+  measurement: cups

@@ -6,6 +6,10 @@ class GroceryList
     @list = []
   end
 
+  def can_generate?
+    recipes.size >= 1
+  end
+
   def generate!
     self.list = all_ingredients
     compress!
@@ -15,6 +19,10 @@ class GroceryList
 
   def has_recipes?
     !recipes.empty?
+  end
+
+  def has?(recipe)
+    recipes.include?(recipe)
   end
 
   def add(list)
@@ -83,4 +91,5 @@ class GroceryList
     end
     string
   end
+
 end

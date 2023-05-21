@@ -1,35 +1,37 @@
 <% content_for :links do %>
+  <link rel="stylesheet" href="/stylesheets/layout.css">
+  <link rel="stylesheet" href="/stylesheets/edit_meals.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./javascripts/submitForm.js"></script>
 <% end %>
 
-
 <h1>Edit meals</h1>
-
-<form action="/add_meal" method="post" id="edit-meals-form">
-
-  <select name="selected_meal" size="4">
-    <% @saved_recipes.each do |recipe| %>
-    <% recipe%>
-      <option ondblclick="submitForm('edit-meals-form')" value="<%= recipe.id %>">
-        <%= recipe.name %>
-      </option>
-
-    <% end %>
-    </select>
-</form>
-
-<form onsubmit="alert(this.submitted; return false;)" action="/delete_meal" method="post" id="delete-meals-form">
-  <h2>Current meals</h2>
-    <ul>
-      <% session[:grocery_list].recipes.each do |meal| %>
-        <li>
-          <%= meal.name %>
-          <input onclick="this.form.submitted=this.value;" id="delete-button" type="submit" name="delete" value="<%= meal.name %>">
-        </li>
-        
+<fieldset>
+  <form action="/add_meal" method="post" id="edit-meals-form">
+    <h2>Double click to add &mdash; &gt;</h2>
+    <select name="selected_meal" size="4">
+      <% @saved_recipes.each do |recipe| %>
+      <% recipe%>
+        <option ondblclick="submitForm('edit-meals-form')" value="<%= recipe.id %>">
+          <%= recipe.name %>
+        </option>
       <% end %>
-    </ul>
+      </select>
+  </form>
 
-</form>
+  <form action="/delete_meal" method="post" id="delete-meals-form">
+    <h2>Current meals</h2>
+      <ul class="content">
+        <% session[:grocery_list].recipes.each do |meal| %>
+          <li>
+            <p><%= meal.name %></p>
+            <button onclick="this.form.submitted=this.value;" type="submit" class="delete" name="delete" value="<%= meal.name %>">
+              <img src="/data/images/black-x.gif" alt="black x">
+            </button>
+          </li>
+          
+        <% end %>
+      </ul>
+  </form>
+</fieldset>
 

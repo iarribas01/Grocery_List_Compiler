@@ -3,27 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Grocery List Compiler</title>
-    <link rel="stylesheet" href="./stylesheets/layout.css">
+    <link rel="icon" href="/data/images/favicon.ico">
+    <link rel="stylesheet" href="/stylesheets/layout.css">
+
     <%= yield_content :links %>
   </head>
   <body>
 
-  <header>
+  <aside>
     <nav>
-      <ul>
+      <ul class="sidebar">
         <li><a href="/">Home</a></li>
         <li><a href="/edit_meals">Edit meals</a></li>
         <li><a href="/new_recipe">New recipe</a></li>
-        <li><a href="#"></a></li>
       </ul>
     </nav>
-  </header>
+  </aside>
 
   <main>
-    <p>This belongs to layout.erb</p>
+    <p class="flash-message error"><%= session.delete(:error) %></p>
+    <p class="flash-message success"><%= session.delete(:success) %></p>
     <%= yield %>
-
-  
   </main>
+
   </body>
 </html>

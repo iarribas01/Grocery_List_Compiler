@@ -3,10 +3,9 @@
   <title>Grocery List Compiler | Home </title>
 <% end %>
 
-<header>
-  <h1>This belongs to home.erb</h1>
-  
-  <h2>This week's meals</h2>
+<h1>This week's meals</h1>
+
+<div class="content">
   <% if session[:grocery_list].has_recipes? %>
     <ul>
       <% session[:grocery_list].recipes.each do |recipe| %>
@@ -14,19 +13,10 @@
       <% end %>
     </ul>
   <% else %>
-    <h3>No meals for this week :(</h3>
+    <p>No meals for this week :(</p>
   <% end %>
+</div>
 
-  <form action="/edit_meals" method="get">
-    <input type="submit" value="Edit meals">
-  </form>
-
-  <form action="/new_recipe" method="get">
-    <input type="submit" value="add recipe">
-  </form>
-
-  <form action="/generate" method="post">
-    <input type="submit" value="generate my list!">
-  </form>
-
-</header>
+<form action="/generate" method="post">
+  <input type="submit" value="generate my list!">
+</form>
